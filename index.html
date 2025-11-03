@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pesquisa de Processos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Olá, vamos testar a API</h1>
+    </header>
+
+    <main>
+        <section>
+            <input type="text" id="cpfCnpj" placeholder="Digite seu CPF/CNPJ">
+            <button onclick="Pesquisar()">Pesquisar processos</button>
+            <p id="documento"></p>
+            <p id="TotalProcessos"></p>
+        </section>
+        <section>
+            <select id="selectDireitos">
+                <option value="">Selecione o tipo de Direito</option>
+                <option value="Civil">Direito Civil</option>
+                <option value="Penal">Direito Penal</option>
+                <option value="Trabalhista">Direito Trabalhista</option>
+                <option value="Tributário">Direito Tributário</option>
+                <option value="Ambiental">Direito Ambiental</option>
+                <option value="Empresarial">Direito Empresarial</option>
+                <option value="Consumidor">Direito do Consumidor</option>
+                <option value="Digital">Direito Digital</option>
+                <option value="Eleitoral">Direito Eleitoral</option>
+                <option value="Administrativo">Direito Administrativo</option>
+                <option value="Constitucional">Direito Constitucional</option>
+                <option value="Imobiliário">Direito Imobiliário</option>
+            </select>
+        </section>
+        <section id="sectionTabela">
+            <div id="dados"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

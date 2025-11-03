@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Processo</title>
+     
+</head>
+<header>    
+<button onclick="window.history.back()">Voltar</button>
+</header>
+<body>
+
+     <section>   
+
+        <h1>Detalhes do Processo</h1>
+
+        <div id="numeroProcesso"></div>
+
+        <h2>Tribunal</h2>
+        <div id="tribunal"></div>
+
+        <h2>Grau</h2>
+        <div id="grau"></div>
+
+        <h2>Classe</h2>
+        <div id="classe"></div>
+
+        <h2>Assunto</h2>
+        <div id="assunto"></div>
+
+        <h2>Último Movimento</h2>
+        <div id="ultimoMov"></div>
+
+        <h2>Partes</h2>
+        <div id="partes"></div>
+ </section>   
+ <section>
+     <div id="chatContainer">
+        <h2>Assistente</h2>
+    <div id="chatBox"></div>
+    <input id="mensagem" type="text" placeholder="Digite sua mensagem...">
+     <button onclick="enviarMensagem()">Enviar</button>
+    </div>
+ </section>    
+<script>
+   
+    const processo = JSON.parse(localStorage.getItem("processoSelecionado"));
+
+    document.getElementById("numeroProcesso").textContent =
+        `Número do processo: ${processo.numeroProcesso}`;
+
+    const tramitacao = processo.tramitacoes[0]; // ✅ pegar única tramitação
+
+    document.getElementById("tribunal").innerHTML = `
+        <p>Sigla: ${tramitacao.tribunal.sigla}</p>
+        <p>Nome: ${tramitacao.tribunal.nome}</p>
+        <p>Segmento: ${tramitacao.tribunal.segmento}</p>
+        <p>JTR: ${tramitacao.tribunal.jtr}</p>
+    `;
+
+    document.getElementById("grau").innerHTML = `
+        <p>Sigla: ${tramitacao.grau.sigla}</p>
+        <p>Nome: ${tramitacao.grau.nome}</p>
+        <p>Número: ${tramitacao.grau.numero}</p>
+    `;
+
+    document.getElementById("classe").innerHTML = tramitacao.classe
+        .map(c => `<p>${c.codigo} — ${c.descricao}</p>`)
+        .join("");
+
+    document.getElementById("assunto").innerHTML = tramitacao.assunto
+        .map(a => `
+            <p><b>${a.codigo}</b> — ${a.descricao}<br>
+            ${a.hierarquia}</p>
+        `)
+        .join("");
+
+    document.getElementById("movimento").innerHTML = `
+        <p>Código: ${tramitacao.ultimoMovimento.codigo}</p>
+        <p>Data/Hora: ${tramitacao.ultimoMovimento.dataHora}</p>
+    `;
+    
+    
+
+     
+    async function enviarMensagem() {
+        const chatBox = document.getElementById("chatBox");
+        const input = document.getElementById("mensagem");
+        const texto = input.value.trim();
+        if (!texto) return;
+
+        chatBox.innerHTML += `<p><b>Você:</b> ${texto}</p>`;
+        input.value = "";
+
+        try {
+            const resposta = await fetch("http://localhost:3000/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mensagem: texto })
+            });
+
+            const data = await resposta.json();
+            const textoResposta = data.resposta || "Erro na resposta";
+
+            chatBox.innerHTML += `<p><b>IA:</b> ${textoResposta}</p>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+        } catch (err) {
+            chatBox.innerHTML += `<p><b>Erro:</b> ${err.message}</p>`;
+        }
+    }
+</script>
+
+
+    
+
+</body>
+<style>
+body {
+    font-family: Arial, sans-serif;
+}
+
+body > section {
+    padding: 10px;
+}
+
+body {
+    display: flex;          
+    gap: 20px;    background-color: rgb(245, 131, 0);
+    font-family: "Cabin", sans-serif;
+    font-weight: 300;
+    display: flex;
+    gap: 3rem;          
+}
+
+button {
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input {
+    width: 25%;
+    padding: 0.6rem;
+    border-radius: 5px;
+}
+
+section {
+    flex: 1;               
+    border: 1px solid #ccc; 
+    padding: 10px;
+    box-sizing: border-box;
+}
+</style>
+
+</html>

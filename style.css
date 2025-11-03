@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body {
+    background-color: rgb(255, 115, 0);
+    font-family: "Cabin", sans-serif;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+
+
+
+/* GRANDES ------------------------------------------------------------------ */
+header {
+    padding: 2rem;
+    text-align: center;
+} 
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#sectionTabela {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 95%;         /* ocupa quase toda a tela */
+    margin: auto;       /* centraliza horizontalmente */
+    align-items: flex-start; /* alinha tabela e botões pelo topo */
+}
+
+/*  ------------------------------------------------------------------ */
+
+/* PEQUENOS ------------------------------------------------------------------ */
+button {
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+select {
+     width: 25%;
+    padding: 0.6rem;
+    border-radius: 5px;
+
+}
+input {
+    width: 25%;
+    padding: 0.6rem;
+    border-radius: 5px;
+}
+
+table {
+    width: 80%;              /* deixa a tabela mais alongada */
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;        /* bordas arredondadas funcionam corretamente */
+}
+
+table th, table td { 
+    border: 1px solid black; 
+    text-align: center;
+    padding: 1rem 2rem;      /* aumenta o espaçamento horizontal e vertical */
+    background-color: #fafafa;
+}
+
+/* Opcional: cabeçalho diferente */
+table th {
+    background-color: #d9d9d9;
+    font-weight: bold;
+}
+
