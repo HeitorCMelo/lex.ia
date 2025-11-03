@@ -9,8 +9,11 @@ Para funcionar, faça as seguintes instruções:
 
 É necessário instalar o Node.js (link para instalação: http://nodejs.org/dist/v24.11.0/node-v24.11.0-x64.msi)
 
+Além disso, altere o Token da OPENAI_API_KEY, para uma que estará em um bloco de notas.
+
 
 ---------------------------------------------------------------
+
 
 
 Feito por: X-GHOR
